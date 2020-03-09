@@ -36,12 +36,12 @@ ALL DONE! 🎉🎉🎉
 ```
 jupyter notebook
 ```
-<img src="image/hive1.png" width = "700" height = "300" />
+<img src="image/hive2.png" width = "700" height = "300" />
 
 ### step1: you should set mysql host and port
 
 ### step2: write your mysql code
-![](image/hive2.png)
+![](image/hive1.png)
 
 ## Quote 
 kernel logo
