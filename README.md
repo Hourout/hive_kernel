@@ -38,9 +38,9 @@ jupyter notebook
 ```
 <img src="image/hive2.png" width = "700" height = "300" />
 
-### step1: you should set mysql host and port
+### step1: you should set hive host and port
 
-### step2: write your mysql code
+### step2: write your hive code
 ![](image/hive1.png)
 
 ## Quote 
