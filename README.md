@@ -1,4 +1,4 @@
-# hive_kernel
+# Hive_kernel
 Hive  Kernel for Jupyter
 
 ![PyPI version](https://img.shields.io/pypi/pyversions/hive_kernel.svg)
@@ -38,9 +38,9 @@ jupyter notebook
 ```
 <img src="image/hive2.png" width = "700" height = "300" />
 
-### step1: you should set hive host and port
+### step1: you should set hive server (host and port)
 
-### step2: write your hive code
+### step2: write your hive sql
 ![](image/hive1.png)
 
 ## Quote 
