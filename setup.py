@@ -10,8 +10,8 @@ def readme():
         return f.read()
 
 setup(name='hive_kernel',
-      version='0.1.0',
-      description='A mysql kernel for Jupyter.',
+      version='0.2.0',
+      description='A hive kernel for Jupyter.',
       long_description=readme(),
       long_description_content_type='text/markdown',
       url='https://github.com/Hourout/hive_kernel',
