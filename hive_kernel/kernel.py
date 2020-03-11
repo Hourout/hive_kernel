@@ -3,7 +3,7 @@ import sqlalchemy as sa
 from ipykernel.kernelbase import Kernel
 
 
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 
 class HiveKernel(Kernel):
     implementation = 'hive_kernel'
@@ -18,12 +18,51 @@ class HiveKernel(Kernel):
     def __init__(self, **kwargs):
         Kernel.__init__(self, **kwargs)
         self.engine = False
+        self.msg_help = """Hive kernel help document
+        
+        name: 'hive_kernel',
+        version: '0.2.0',
+        description: 'A hive kernel for Jupyter.',
+        homepage: https://github.com/Hourout/hive_kernel,
+        author: 'JinQing Lee',
+        author_email: 'hourout@163.com'
+        
+        Step1: you should set you hive ip and port.
+        example
+        ```
+        hive://127.0.0.1:10000;
+        ```
+
+        Step2: write your hive sql
+        example
+        ```
+        select date_sub(current_date, 1) dd;
+        ```
+
+        Tips:
+        Every time you write a complete sql, it is best to add ';' at the end.
+        """
         
     def output(self, output):
         if not self.silent:
-            display_content = {'source': 'kernel',
-                               'data': {'text/html': output},
-                               'metadata': {}}
+            try:
+                a = output
+                k = a[a.find('statusCode='):a.find(', infoMessages')].replace('=', ':')+'\n'
+                k += a[a.find('sqlState'):a.find( 'errorCode')].replace('=',':').rstrip()+'\n'
+                k += a[a.find( 'errorCode'):a.find('errorMessage')].replace('=',':')+'\n'
+                k += 'infoMessages:\n'
+                for i in a[a.find('infoMessages')+13:a.find('sqlState')].split(','):
+                    k = k+i+'\n'
+                k += 'errorMessage:\n'
+                k += a[a.find('errorMessage')+13:a.find('operationHandle')].replace('=',':')[:-3]
+                k = k.replace("'", '').replace('"', '').replace(",", '')
+                display_content = {'source': 'kernel',
+                                   'data': {'text/html': k},
+                                   'metadata': {}}
+            except:
+                display_content = {'source': 'kernel',
+                                   'data': {'text/html': output},
+                                   'metadata': {}}
             self.send_response(self.iopub_socket, 'display_data', display_content)
     
     def ok(self):
@@ -50,6 +89,8 @@ class HiveKernel(Kernel):
                 if len(l)>0:
                     if l.startswith('hive://'):
                         self.engine = sa.create_engine(f'{l}')
+                    elif l.startswith('help'):
+                        self.output(self.msg_help)
                     else:
                         if self.engine:
                             output = pd.read_sql(l, self.engine).to_html()
