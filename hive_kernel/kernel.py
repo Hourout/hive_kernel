@@ -88,6 +88,8 @@ class HiveKernel(Kernel):
                 if len(l)>0:
                     if l.startswith('hive://'):
                         self.engine = sa.create_engine(f'{l}')
+                    elif l.startswith('set'):
+                        pass
                     elif l.startswith('help'):
                         self.output_help()
                     else:
