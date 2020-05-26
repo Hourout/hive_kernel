@@ -89,7 +89,7 @@ class HiveKernel(Kernel):
                     if l.startswith('hive://'):
                         self.engine = sa.create_engine(f'{l}')
                     elif l.startswith('set'):
-                        pass
+                        pd.io.sql.execute(l, con=self.engine)
                     elif l.startswith('help'):
                         self.output_help()
                     else:
