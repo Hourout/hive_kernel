@@ -88,7 +88,21 @@ class HiveKernel(Kernel):
                 if len(l)>0:
                     if l.startswith('hive://'):
                         self.engine = sa.create_engine(f'{l}')
-                    elif l.startswith('set'):
+                    elif l.startswith('set '):
+                        pd.io.sql.execute(l, con=self.engine)
+                    elif l.startswith('create database '):
+                        pd.io.sql.execute(l, con=self.engine)
+                    elif l.startswith('create schema '):
+                        pd.io.sql.execute(l, con=self.engine)
+                    elif l.startswith('show databases '):
+                        pd.io.sql.execute(l, con=self.engine)
+                    elif l.startswith('drop database '):
+                        pd.io.sql.execute(l, con=self.engine)
+                    elif l.startswith('drop schema '):
+                        pd.io.sql.execute(l, con=self.engine)
+                    elif l.startswith('drop table '):
+                        pd.io.sql.execute(l, con=self.engine)
+                    elif l.startswith('alter table '):
                         pd.io.sql.execute(l, con=self.engine)
                     elif l.startswith('help'):
                         self.output_help()
