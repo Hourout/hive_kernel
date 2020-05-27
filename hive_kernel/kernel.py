@@ -97,8 +97,6 @@ class HiveKernel(Kernel):
                         pd.io.sql.execute(l, con=self.engine)
                     elif l.startswith('create schema '):
                         pd.io.sql.execute(l, con=self.engine)
-                    elif l.startswith('show databases '):
-                        pd.io.sql.execute(l, con=self.engine)
                     elif l.startswith('drop database '):
                         pd.io.sql.execute(l, con=self.engine)
                     elif l.startswith('drop schema '):
