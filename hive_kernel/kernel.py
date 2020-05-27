@@ -88,7 +88,7 @@ class HiveKernel(Kernel):
                 if len(l)>0:
                     if l.startswith('hive://'):
                         if l.count('@')!=1:
-                            self.output("The hive address cannot have two '@'.")
+                            self.output("Connection failed, The hive address cannot have two '@'.")
                         else:
                             self.engine = sa.create_engine(f'{l}')
                     elif l.startswith('set '):
