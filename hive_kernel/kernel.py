@@ -87,7 +87,10 @@ class HiveKernel(Kernel):
                 l = v.lower()
                 if len(l)>0:
                     if l.startswith('hive://'):
-                        self.engine = sa.create_engine(f'{l}')
+                        if l.count('@')!=1:
+                            self.output("The hive address cannot have two '@'.")
+                        else:
+                            self.engine = sa.create_engine(f'{l}')
                     elif l.startswith('set '):
                         pd.io.sql.execute(l, con=self.engine)
                     elif l.startswith('create database '):
