@@ -33,6 +33,25 @@ python3 -m hive_kernel.install
 
 ALL DONE! 🎉🎉🎉
 
+## Uninstall
+
+#### step1:
+
+View and remove hive kernel
+```
+jupyter kernelspec list
+jupyter kernelspec remove hive
+```
+
+#### step2:
+uninstall hive kernel:
+
+```
+pip3 uninstall hive-kernel
+```
+
+ALL DONE! 🎉🎉🎉
+
 ## Using
 
 ```
