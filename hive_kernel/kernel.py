@@ -3,7 +3,7 @@ import sqlalchemy as sa
 from ipykernel.kernelbase import Kernel
 
 
-__version__ = '0.3.0'
+__version__ = '0.3.1'
 
 class HiveKernel(Kernel):
     implementation = 'hive_kernel'
@@ -21,7 +21,7 @@ class HiveKernel(Kernel):
         
     def output_help(self):
         msg = ["Hive kernel help document", "name: 'hive_kernel'",
-        "version: '0.3.0'",
+        "version: '0.3.1'",
         "description: 'A hive kernel for Jupyter.'",
         "homepage: https://github.com/Hourout/hive_kernel",
         "author: 'JinQing Lee'",
