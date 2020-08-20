@@ -109,7 +109,7 @@ class HiveKernel(Kernel):
                         self.output_help()
                     else:
                         if self.engine:
-                            if l.startswith('select '):
+                            if l.startswith('select ') and ' limit ' not in l:
                                 output = pd.read_sql(l+' limit 1000', self.engine).to_html()
                             else:
                                 output = pd.read_sql(l, self.engine).to_html()
