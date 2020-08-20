@@ -3,7 +3,7 @@ import sqlalchemy as sa
 from ipykernel.kernelbase import Kernel
 
 
-__version__ = '0.2.0'
+__version__ = '0.3.0'
 
 class HiveKernel(Kernel):
     implementation = 'hive_kernel'
@@ -21,7 +21,7 @@ class HiveKernel(Kernel):
         
     def output_help(self):
         msg = ["Hive kernel help document", "name: 'hive_kernel'",
-        "version: '0.2.0'",
+        "version: '0.3.0'",
         "description: 'A hive kernel for Jupyter.'",
         "homepage: https://github.com/Hourout/hive_kernel",
         "author: 'JinQing Lee'",
@@ -109,7 +109,10 @@ class HiveKernel(Kernel):
                         self.output_help()
                     else:
                         if self.engine:
-                            output = pd.read_sql(l, self.engine).to_html()
+                            if l.startswith('select '):
+                                output = pd.read_sql(l+' limit 1000', self.engine).to_html()
+                            else:
+                                output = pd.read_sql(l, self.engine).to_html()
                         else:
                             output = 'Unable to connect to Hive server. Check that the server is running.'
             self.output(output)
