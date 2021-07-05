@@ -3,7 +3,7 @@ import sqlalchemy as sa
 from ipykernel.kernelbase import Kernel
 
 
-__version__ = '0.3.1'
+__version__ = '0.4.0'
 
 class HiveKernel(Kernel):
     implementation = 'hive_kernel'
@@ -21,7 +21,7 @@ class HiveKernel(Kernel):
         
     def output_help(self):
         msg = ["Hive kernel help document", "name: 'hive_kernel'",
-        "version: '0.3.1'",
+        "version: '0.4.0'",
         "description: 'A hive kernel for Jupyter.'",
         "homepage: https://github.com/Hourout/hive_kernel",
         "author: 'JinQing Lee'",
@@ -92,27 +92,27 @@ class HiveKernel(Kernel):
                         else:
                             self.engine = sa.create_engine(f'{v}')
                     elif l.startswith('set '):
-                        pd.io.sql.execute(l, con=self.engine)
+                        pd.io.sql.execute(v, con=self.engine)
                     elif l.startswith('create database '):
-                        pd.io.sql.execute(l, con=self.engine)
+                        pd.io.sql.execute(v, con=self.engine)
                     elif l.startswith('create schema '):
-                        pd.io.sql.execute(l, con=self.engine)
+                        pd.io.sql.execute(v, con=self.engine)
                     elif l.startswith('drop database '):
-                        pd.io.sql.execute(l, con=self.engine)
+                        pd.io.sql.execute(v, con=self.engine)
                     elif l.startswith('drop schema '):
-                        pd.io.sql.execute(l, con=self.engine)
+                        pd.io.sql.execute(v, con=self.engine)
                     elif l.startswith('drop table '):
-                        pd.io.sql.execute(l, con=self.engine)
+                        pd.io.sql.execute(v, con=self.engine)
                     elif l.startswith('alter table '):
-                        pd.io.sql.execute(l, con=self.engine)
+                        pd.io.sql.execute(v, con=self.engine)
                     elif l.startswith('help'):
                         self.output_help()
                     else:
                         if self.engine:
                             if l.startswith('select ') and ' limit ' not in l:
-                                output = pd.read_sql(l+' limit 1000', self.engine).to_html()
+                                output = pd.read_sql(f'{v} limit 1000', self.engine).to_html()
                             else:
-                                output = pd.read_sql(l, self.engine).to_html()
+                                output = pd.read_sql(v, self.engine).to_html()
                         else:
                             output = 'Unable to connect to Hive server. Check that the server is running.'
             self.output(output)
