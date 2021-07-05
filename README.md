@@ -15,20 +15,20 @@ Hive  Kernel for Jupyter
 
 #### step1:
 ```
-pip3 install hive_kernel
+pip install hive_kernel
 ```
 
 To get the newest one from this repo (note that we are in the alpha stage, so there may be frequent updates), type:
 
 ```
-pip3 install git+git://github.com/Hourout/hive_kernel.git
+pip install git+git://github.com/Hourout/hive_kernel.git
 ```
 
 #### step2:
 Add kernel to your jupyter:
 
 ```
-python3 -m hive_kernel.install
+python -m hive_kernel.install
 ```
 
 ALL DONE! 🎉🎉🎉
@@ -47,7 +47,7 @@ jupyter kernelspec remove hive
 uninstall hive kernel:
 
 ```
-pip3 uninstall hive-kernel
+pip uninstall hive-kernel
 ```
 
 ALL DONE! 🎉🎉🎉
