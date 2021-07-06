@@ -3,7 +3,7 @@ import sqlalchemy as sa
 from ipykernel.kernelbase import Kernel
 
 
-__version__ = '0.4.0'
+__version__ = '0.4.1'
 
 class HiveKernel(Kernel):
     implementation = 'hive_kernel'
@@ -21,7 +21,7 @@ class HiveKernel(Kernel):
         
     def output_help(self):
         msg = ["Hive kernel help document", "name: 'hive_kernel'",
-        "version: '0.4.0'",
+        "version: '0.4.1'",
         "description: 'A hive kernel for Jupyter.'",
         "homepage: https://github.com/Hourout/hive_kernel",
         "author: 'JinQing Lee'",
@@ -109,6 +109,10 @@ class HiveKernel(Kernel):
                         self.output_help()
                     else:
                         if self.engine:
+                            if ' like ' in l:
+                                if l[l.find(' like ')+6:].count('%')<4:
+                                    self.output("sql code ' like %xx%' should be replace ' like %%xx%%'.")
+                                    return self.ok()
                             if l.startswith('select ') and ' limit ' not in l:
                                 output = pd.read_sql(f'{v} limit 1000', self.engine).to_html()
                             else:
