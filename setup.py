@@ -1,8 +1,4 @@
-import os
-import sys
-import json
-
-from setuptools import setup, find_packages
+from setuptools import setup
 
 
 def readme():
@@ -10,7 +6,7 @@ def readme():
         return f.read()
 
 setup(name='hive_kernel',
-      version='0.4.0',
+      version='0.4.1',
       description='A hive kernel for Jupyter.',
       long_description=readme(),
       long_description_content_type='text/markdown',
